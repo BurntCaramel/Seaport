@@ -14,10 +14,10 @@ class GitHubRepoReader: ObservableObject {
 	
 	@Published var refs: Refs?
 	
-//	init(ownerName: String, repoName: String) {
-//		self.ownerName = ownerName
-//		self.repoName = repoName
-//	}
+	//	init(ownerName: String, repoName: String) {
+	//		self.ownerName = ownerName
+	//		self.repoName = repoName
+	//	}
 	
 	struct Input {
 		var ownerName = ""
@@ -25,35 +25,51 @@ class GitHubRepoReader: ObservableObject {
 	}
 	
 	struct Refs {
-//		var ownerName: String
-//		var repoName: String
+		//		var ownerName: String
+		//		var repoName: String
 		var headRef: String?
 		var refs: Array<(ref: String, oid: String)>
 		
 		init?(pktLine: Data) {
 			headRef = nil
 			refs = []
-//			let first = pktLine[0..<4]
-//			guard let lengthHex = String(data: pktLine.prefix(4), encoding: .utf8) else { return nil }
-//			let scanner = Scanner(string: lengthHex)
-//			var length: UInt32 = 0
-//			guard scanner.scanHexInt32(&length) else { return nil }
-//			guard let length = scanner.scanInt32(representation: .hexadecimal) else { return nil }
+			//			let first = pktLine[0..<4]
+			//			guard let lengthHex = String(data: pktLine.prefix(4), encoding: .utf8) else { return nil }
+			//			let scanner = Scanner(string: lengthHex)
+			//			var length: UInt32 = 0
+			//			guard scanner.scanHexInt32(&length) else { return nil }
+			//			guard let length = scanner.scanInt32(representation: .hexadecimal) else { return nil }
 			
 			guard let string = String(data: pktLine, encoding: .utf8) else { return nil }
-//			let substring = string[string.startIndex..<string.endIndex]
+//			var substring = string[string.startIndex..<string.endIndex]
 			let scanner = Scanner(string: string)
-			while true {
-				guard let length = scanner.scanInt32(representation: .hexadecimal) else { return nil }
-	//			scanner.currentIndex
-				let lineEndIndex = string.index(scanner.currentIndex, offsetBy: String.IndexDistance(length))
-				let line = string[scanner.currentIndex..<lineEndIndex]
-				scanner.currentIndex = lineEndIndex
-				let parts = line.split(separator: " ")
-				let oid = parts[0]
-				let rawRef = parts[1]
+			while !scanner.isAtEnd {
+				let substring = string[scanner.currentIndex..<string.endIndex]
+				//				autoreleasepool {
+				let hexString = String(substring.prefix(4))
+				print("Scan", scanner.scanLocation, hexString)
+				let hexScanner = Scanner(string: hexString)
 				
-				refs.append((ref: String(rawRef), oid: String(oid)))
+				guard let length = hexScanner.scanUInt64(representation: .hexadecimal) else { return nil }
+				//				guard let length = scanner.scanInt32(representation: .hexadecimal) else { return nil }
+				print("Line length", length)
+				if length <= 4 {
+					string.formIndex(&scanner.currentIndex, offsetBy: 4)
+					continue
+				}
+				//			scanner.currentIndex
+				let lineStart = string.index(scanner.currentIndex, offsetBy: String.IndexDistance(4))
+				let lineEnd = string.index(scanner.currentIndex, offsetBy: String.IndexDistance(length))
+				scanner.currentIndex = lineEnd
+				
+				let line = string[lineStart..<lineEnd]
+				
+				if (line.count > 0) {
+					let parts = line.split(separator: " ")
+					let oid = parts[0]
+					let rawRef = parts[1]
+					refs.append((ref: String(rawRef), oid: String(oid)))
+				}
 			}
 			
 		}
@@ -67,7 +83,7 @@ class GitHubRepoReader: ObservableObject {
 		
 		static func fetch(ownerName: String, repoName: String) -> AnyPublisher<Self?, Never> {
 			guard let url = url(ownerName: ownerName, repoName: repoName) else { return Just(nil).eraseToAnyPublisher() }
-
+			
 			return URLSession.shared.dataTaskPublisher(for: url)
 				.map { $0.data }
 				.map { Refs(pktLine: $0) }

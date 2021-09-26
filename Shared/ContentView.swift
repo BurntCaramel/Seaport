@@ -38,6 +38,7 @@ struct SearchView: View {
 			}.padding().layoutPriority(1)
 			
 			GitHubRepoResultsView(ownerName: ownerName, repoName: repoName, refs: gitHubRepoReader.refs)
+				.navigationTitle("\(ownerName)/\(repoName)")
 			
 			Form {
 				Section(header: Text("Search npm packages:")) {
@@ -107,11 +108,16 @@ struct GitHubRepoResultsView: View {
 	var body: some View {
 		VStack {
 			if let refs = refs {
-				Section(header: Text("Refs")) {
-					ForEach(refs.refs, id: \.ref) { ref in
-						Text("\(ref.ref)")
-						Text("\(ref.oid)")
-					}
+				ScrollView {
+					Section(header: Text("Refs").font(.title)) {
+						ForEach(refs.refs, id: \.ref) { ref in
+							HStack {
+								Text("\(ref.ref)").font(.body).fontWeight(.bold)
+								Spacer()
+								Text("\(ref.oid)")
+							}
+						}
+					}.padding()
 				}
 			}
 		}
