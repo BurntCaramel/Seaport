@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B23B854027000C9000B20AFD /* GitHubRepoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B853F27000C9000B20AFD /* GitHubRepoReader.swift */; };
 		B25AC3C925E36899007AC97F /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25AC3C825E36899007AC97F /* Tests_iOS.swift */; };
 		B25AC3D425E36899007AC97F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25AC3D325E36899007AC97F /* Tests_macOS.swift */; };
 		B25AC3D625E36899007AC97F /* SeaportApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25AC3AD25E36898007AC97F /* SeaportApp.swift */; };
@@ -15,6 +16,10 @@
 		B25AC3D925E36899007AC97F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25AC3AE25E36898007AC97F /* ContentView.swift */; };
 		B25AC3DA25E36899007AC97F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B25AC3AF25E36899007AC97F /* Assets.xcassets */; };
 		B25AC3DB25E36899007AC97F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B25AC3AF25E36899007AC97F /* Assets.xcassets */; };
+		B26A364626FAD4D000C46880 /* GitHubReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A364526FAD4D000C46880 /* GitHubReader.swift */; };
+		B26A364726FAD4D000C46880 /* GitHubReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A364526FAD4D000C46880 /* GitHubReader.swift */; };
+		B2FA630325E4911800148ABE /* ModuleSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA630225E4911800148ABE /* ModuleSearcher.swift */; };
+		B2FA630425E4911800148ABE /* ModuleSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA630225E4911800148ABE /* ModuleSearcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B23B853F27000C9000B20AFD /* GitHubRepoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoReader.swift; sourceTree = "<group>"; };
 		B25AC3AD25E36898007AC97F /* SeaportApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaportApp.swift; sourceTree = "<group>"; };
 		B25AC3AE25E36898007AC97F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B25AC3AF25E36899007AC97F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +55,8 @@
 		B25AC3CF25E36899007AC97F /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25AC3D325E36899007AC97F /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		B25AC3D525E36899007AC97F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B26A364526FAD4D000C46880 /* GitHubReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubReader.swift; sourceTree = "<group>"; };
+		B2FA630225E4911800148ABE /* ModuleSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleSearcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +108,7 @@
 			children = (
 				B25AC3AD25E36898007AC97F /* SeaportApp.swift */,
 				B25AC3AE25E36898007AC97F /* ContentView.swift */,
+				B26A364426FAD25400C46880 /* Model */,
 				B25AC3AF25E36899007AC97F /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -146,9 +155,19 @@
 			isa = PBXGroup;
 			children = (
 				B25AC3D325E36899007AC97F /* Tests_macOS.swift */,
+				B23B853F27000C9000B20AFD /* GitHubRepoReader.swift */,
 				B25AC3D525E36899007AC97F /* Info.plist */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		B26A364426FAD25400C46880 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA630225E4911800148ABE /* ModuleSearcher.swift */,
+				B26A364526FAD4D000C46880 /* GitHubReader.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,7 +328,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25AC3D825E36899007AC97F /* ContentView.swift in Sources */,
+				B2FA630325E4911800148ABE /* ModuleSearcher.swift in Sources */,
 				B25AC3D625E36899007AC97F /* SeaportApp.swift in Sources */,
+				B26A364626FAD4D000C46880 /* GitHubReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +339,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25AC3D925E36899007AC97F /* ContentView.swift in Sources */,
+				B2FA630425E4911800148ABE /* ModuleSearcher.swift in Sources */,
 				B25AC3D725E36899007AC97F /* SeaportApp.swift in Sources */,
+				B26A364726FAD4D000C46880 /* GitHubReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25AC3D425E36899007AC97F /* Tests_macOS.swift in Sources */,
+				B23B854027000C9000B20AFD /* GitHubRepoReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

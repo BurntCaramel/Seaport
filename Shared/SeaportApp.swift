@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SeaportApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	var body: some Scene {
+		WindowGroup {
+			ContentView()
+			#if os(macOS)
+				.frame(minWidth: 400, idealWidth: 600, minHeight: 450, idealHeight: 800)
+			#endif
+		}
+	}
 }
